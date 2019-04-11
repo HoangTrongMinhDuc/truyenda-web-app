@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import styles from './Manga.scss';
-import demo from "../../assets/demo.jpg";
-import List_Latest from './List_Latest';
+import LatestList from './LatestList';
+import LatestFilter from './LatestFilter';
 import Button from '../commonUI/Button';
-import RadioButton from '../commonUI/RadioButton';
 
 
 export default class Main extends Component {
@@ -32,35 +31,13 @@ export default class Main extends Component {
           new_chapter: "Chapter 3",
           date_update: "3 hour ago"
         }
-      ],
-      isActive: true,
-      rdoStatus: 1
+      ]
     };
-  }
-
-  isInputChangeStatus(){
-    const target = event.target;
-    const name = target.name;
-    const value = target.value;
-    this.setState({
-      isBlocking: target.value.length > 0,
-      [name]: value
-    });
-  }
-
-  onSetState(){
-    this.setState({
-      isActive: !this.state.isActive
-    });
-    // alert(this.state.isActive ? "true" : "false");
-    var content = "";
-    content += "Status: " + this.state.rdoStatus;
-    console.log(content);
   }
   render() {
     var elements_mangas = this.state.mangas.map((manga, index) => {
       return  <div key={ manga.id } className="alternative_cls">
-                <List_Latest
+                <LatestList
                   title={ manga.title }
                   count_new_chapter={ manga.count_new_chapter }
                   new_chapter={ manga.new_chapter }
@@ -71,37 +48,15 @@ export default class Main extends Component {
     });
     return (
       <div className="main-wrapper">
-              <h1 className="_3kDZW">Latest Update</h1>
-              <div className="_NkL3">
-                <div><Button style="btn-Brown" display="Filter" onClick={() => {this.onSetState()}} /></div>
-                <div><span>Status</span></div>
-
-                <div>
-                  <div className="md-radio md-radio-inline">
-                    <input value="1" id={3} type="radio" name="rdoStatus"
-                      onChange={() => this.isInputChangeStatus()}
-                      checked={parseInt(this.state.rdoStatus) === 1}
-                    />
-                    <label htmlFor={3}>All</label>
-                  </div>
-                  <div className="md-radio md-radio-inline">
-                    <input value="2" id={4} type="radio" name="rdoStatus" 
-                      onChange={() => this.isInputChangeStatus()}
-                      checked={parseInt(this.state.rdoStatus) === 2}
-                    />
-                    <label htmlFor={4}>Completed</label>
-                  </div>
-                  <div className="md-radio md-radio-inline">
-                    <input value="3" id={5} type="radio" name="rdoStatus" 
-                      onChange={() => this.isInputChangeStatus()}
-                      checked={parseInt(this.state.rdoStatus) === 3}
-                    />
-                    <label htmlFor={5}>Ongoing</label>
-                  </div>
-                </div>
-
-              </div>
-              { elements_mangas }
+        <h1 className="_3kDZW">Latest Update</h1>
+        <LatestFilter />
+        <div className="_3_XVY"><h4>521 manga</h4></div>
+        <div className="_3X8sC">
+          <div className="qjYVyl">Manga</div>
+          <div className="qjYVym">New chapters</div>
+          <div className="qjYVyr">Date updated</div>
+        </div>
+        { elements_mangas }
       </div>
     )
   }

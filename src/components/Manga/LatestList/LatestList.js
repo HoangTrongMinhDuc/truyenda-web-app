@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import styles from './List_Latest.scss';
-import demo from "../../assets/demo.jpg";
+import styles from './LatestList.scss';
+import demo from "../../../assets/demo.jpg";
 
-export default class List_Latest extends Component {
+export default class LatestList extends Component {
   render() {
     return (
       <div className="manga-wrapper"> 
